@@ -11,7 +11,7 @@ void setearTimer50htz(){
 }
 ISR(TIMER3_COMPA_vect) // timer compare interrupt service routine
 {
-  //digitalWrite(38,!digitalRead(38));                     // wait for a second
+  digitalWrite(38,!digitalRead(38));                     // wait for a second
 }
 void setup() {
   // put your setup code here, to run once:

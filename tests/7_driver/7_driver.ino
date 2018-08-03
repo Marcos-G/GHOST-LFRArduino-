@@ -76,7 +76,14 @@ void Parar ()
 }
 void loop ()
 {
- for(int i=0;i<256;i++){
-  
- }
+ Adelante();
+ delay(4000);
+ Atras();
+ delay(4000);
+ Izquierda();
+ delay(4000);
+ Derecha();
+ delay(4000);
+ Parar();
+ delay(4000);
 }
