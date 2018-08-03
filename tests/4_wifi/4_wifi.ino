@@ -11,7 +11,7 @@ void setearTimer20htz(){
 }
 void sendState(){
   
-  Serial1.print("Hola");
+  Serial1.println("Hola");
 }
 ISR(TIMER4_COMPA_vect) // timer compare interrupt service routine
 {
@@ -19,10 +19,15 @@ ISR(TIMER4_COMPA_vect) // timer compare interrupt service routine
 }
 void setup() {
 Serial1.begin(115200);
+delay(100);
+pinMode(38,OUTPUT);
 setearTimer20htz();
 }
-
+char output=' ';
 void loop() {
-  // put your main code here, to run repeatedly:
+  if(Serial1.available()>0){
+      output=Serial.read();
+      digitalWrite(38,!digitalRead(38));
+  }
 
 }

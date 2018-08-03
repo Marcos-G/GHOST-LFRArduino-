@@ -48,8 +48,8 @@ void updateK(){
 void pidCalc(){
   float prom=0;
   float sum=0;
-  for(int a=0;a<6;a++){
-    s[a]=(analogRead(a)*255.0/1024);
+  for(int a=0;a<9;a++){
+    s[a]=(analogRead(a)/4.0);
     //s[a]=(analogRead(a))/4;
     prom+=s[a]*posSen[a];
     sum+=s[a];
@@ -91,17 +91,13 @@ void sendState(){
   msg+=(F(",\"S4\":"));
   msg+=(s[4]);
   msg+=(F(",\"S5\":"));
-  msg+=(s[5]);/*
+  msg+=(s[5]);
   msg+=(F(",\"S6\":"));
   msg+=(s[6]);
   msg+=(F(",\"S7\":"));
   msg+=(s[7]);
   msg+=(F(",\"S8\":"));
   msg+=(s[8]);
-  msg+=(F(",\"S9\":"));
-  msg+=(s[9]);
-  msg+=(F(",\"S10\":"));
-  msg+=(s[10]);*/
   msg+=("}\n");
   Serial1.print(msg);
 }

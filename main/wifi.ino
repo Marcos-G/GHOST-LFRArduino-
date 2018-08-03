@@ -1,3 +1,7 @@
+void setWifiSerialClock(){
+  Serial1.begin(115200);
+  setearTimer20htz();
+}
 void setearTimer20htz(){
   noInterrupts(); // disable all interrupts
   TCCR4A = 0;
@@ -8,6 +12,22 @@ void setearTimer20htz(){
   TCCR4B |= (1 << CS42 ); // 256 prescaler
   TIMSK4 |= (1 << OCIE4A); // enable timer compare interrupt
   interrupts();
+}
+void updateK(){
+  if (Serial1.available()>0) {
+    String input=Serial1.readStringUntil('\n');
+    char k=input[0];
+    float val=input.substring(1).toFloat();
+    if(k=='P'){
+      kp=val;
+    }
+    else if(k=='I'){
+      ki=val;
+    }
+    else if(k=='D'){
+      kd=val;
+    }
+  }
 }
 void sendState(){
   String msg="{";
