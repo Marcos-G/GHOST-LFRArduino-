@@ -27,6 +27,9 @@ void updateK(){//actualizo las K si hay algun dato en el serial
     else if(k=='D'){
       kd=val;
     }
+    else if(k=='V'){
+      vel=val;
+    }
   }
 }
 void sendState(){//String que se envia por wifi
@@ -38,8 +41,9 @@ void sendState(){//String que se envia por wifi
   msg+=(ki);
   msg+=(F(",\"KD\":"));
   msg+=(kd);
-  msg+=(",");
-  msg+=(F("\"POS\":"));
+  msg+=(F(",\"VEL\":"));
+  msg+=(vel);
+  msg+=(F(",\"POS\":"));
   msg+=(pos);
   msg+=(F(",\"EP\":"));
   msg+=(ep);
@@ -70,5 +74,5 @@ void sendState(){//String que se envia por wifi
 }
 ISR(TIMER4_COMPA_vect) // rutina de la interrupcion 4
 {
-  sendState();
+  //sendState();
 }

@@ -1,4 +1,4 @@
-
+int PHANTOM_LED=38;
 void setup() {
   setWifiSerialClock();//se inicia el timer (que activa las interrupciones) y el Serial, para transmitir las comunicaciones wifi
   setPidClock();//se inicia el timer que activa el calculo del pid
