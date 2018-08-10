@@ -25,10 +25,11 @@ void setearTimer20htz(){
 float kp=0.0;float ki=0.0;float kd=0.0;
 float ep=0.0;float ei=0.0;float ed=0.0;
 float pos=6.0;
+boolean invertir=true;
 float preve=0.0;
 float setpoint=6.0;
-int s[]={0,0,0,0,0,0};
-float posSen[]={1.2,3.1,4.7,6.4,8.0,10.0};
+int s[]={0,0,0,0,0,0,0,0,0};
+float posSen[]={1.8,2.8,3.8,4.8,6.0,7.2,8.2,9.2,10.2};
 void updateK(){
   if (Serial1.available()>0) {
     String input=Serial1.readStringUntil('\n');
@@ -49,7 +50,10 @@ void pidCalc(){
   float prom=0;
   float sum=0;
   for(int a=0;a<9;a++){
-    s[a]=(analogRead(a)/4.0);
+    s[a]=(analogRead(a));
+    if(invertir){
+    s[a]=1023-s[a];
+    }
     //s[a]=(analogRead(a))/4;
     prom+=s[a]*posSen[a];
     sum+=s[a];

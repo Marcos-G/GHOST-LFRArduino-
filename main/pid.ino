@@ -3,6 +3,7 @@ float ep=0.0;float ei=0.0;float ed=0.0;
 float pos=6.0;
 float preve=0.0;
 float setpoint=6.0;
+int et=0;
 void setPidClock(){
   setearTimer50htz();
 }
@@ -27,4 +28,6 @@ void pidCalc(){
   ep=e*kp;
   ed=(e-preve)*kd;
   preve=e;
+  et=ep+ed;
+  correccion(et);
 }
