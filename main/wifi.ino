@@ -1,8 +1,8 @@
-void setWifiSerialClock(){
+void setWifiSerialClock(){//Serial y timer
   Serial1.begin(115200);
   setearTimer20htz();
 }
-void setearTimer20htz(){
+void setearTimer20htz(){//seteo del timer a 20Htz
   noInterrupts(); // disable all interrupts
   TCCR4A = 0;
   TCCR4B = 0;
@@ -13,7 +13,7 @@ void setearTimer20htz(){
   TIMSK4 |= (1 << OCIE4A); // enable timer compare interrupt
   interrupts();
 }
-void updateK(){
+void updateK(){//actualizo las K si hay algun dato en el serial
   if (Serial1.available()>0) {
     String input=Serial1.readStringUntil('\n');
     char k=input[0];
@@ -29,7 +29,7 @@ void updateK(){
     }
   }
 }
-void sendState(){
+void sendState(){//String que se envia por wifi
   String msg="{";
 ///
   msg+=(F("\"KP\":"));
@@ -68,7 +68,7 @@ void sendState(){
   msg+=("}\n");
   Serial1.print(msg);
 }
-ISR(TIMER4_COMPA_vect) // timer compare interrupt service routine
+ISR(TIMER4_COMPA_vect) // rutina de la interrupcion 4
 {
   sendState();
 }

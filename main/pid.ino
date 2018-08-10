@@ -4,10 +4,10 @@ float pos=6.0;
 float preve=0.0;
 float setpoint=6.0;
 int et=0;
-void setPidClock(){
+void setPidClock(){//para que sea mas bonito
   setearTimer50htz();
 }
-void setearTimer50htz(){
+void setearTimer50htz(){//seteo de timer de 50khz con variables de registro
   noInterrupts(); // disable all interrupts
   TCCR3A = 0;
   TCCR3B = 0;
@@ -18,12 +18,12 @@ void setearTimer50htz(){
   TIMSK3 |= (1 << OCIE3A); // enable timer compare interrupt
   interrupts();
 }
-ISR(TIMER3_COMPA_vect) // timer compare interrupt service routine
+ISR(TIMER3_COMPA_vect) // rutina de interrupcion 3
 {
   pidCalc();
 }
-void pidCalc(){
-  sensado();
+void pidCalc(){ //calculo del pid
+  sensado();//llamado a sensar
   float e=pos-setpoint;
   ep=e*kp;
   ed=(e-preve)*kd;
