@@ -9,23 +9,13 @@ void setDriverModes(){
   pinMode (I4, OUTPUT);
   pinMode(PHANTOM_LED,OUTPUT);
 }
-void correccion(int e){//giro    SOLO PARA ESTATICO(vel=0), despues hay que tocarlo
+void correccion(int e){//giro
   if(e>0){//si el error es positivo girar a la derecha
-    setMotores(vel+e,0);
-      String smot="motores";
-      smot+=vel+e;
-      smot+=" , ";
-      smot+=0;
-      Serial1.println(smot);
+    setMotores(min(255,vel+e),vel);
     digitalWrite(PHANTOM_LED,HIGH);
   }
   if(e<0){//si el error es negativo girar a la izquierda
-      setMotores(0,vel-e);
-      String smot="motores";
-      smot+=0;
-      smot+=" , ";
-      smot+=vel-e;
-      Serial1.println(smot);
+    setMotores(vel,min(255,vel-e));
       digitalWrite(PHANTOM_LED,LOW);
   }
 }

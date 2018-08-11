@@ -4,13 +4,13 @@ void setWifiSerialClock(){//Serial y timer
 }
 void setearTimer20htz(){//seteo del timer a 20Htz
   noInterrupts(); // disable all interrupts
-  TCCR4A = 0;
-  TCCR4B = 0;
-  TCNT4 = 0;
-  OCR4A = 3125; // compare match register 16MHz/256/20Hz (20016micros)
-  TCCR4B |= (1 << WGM42); // CTC mode
-  TCCR4B |= (1 << CS42 ); // 256 prescaler
-  TIMSK4 |= (1 << OCIE4A); // enable timer compare interrupt
+  TCCR5A = 0;
+  TCCR5B = 0;
+  TCNT5 = 0;
+  OCR5A = 3125; // compare match register 16MHz/256/20Hz (20016micros)
+  TCCR5B |= (1 << WGM52); // CTC mode
+  TCCR5B |= (1 << CS52 ); // 256 prescaler
+  TIMSK5 |= (1 << OCIE5A); // enable timer compare interrupt
   interrupts();
 }
 void updateK(){//actualizo las K si hay algun dato en el serial
@@ -51,6 +51,8 @@ void sendState(){//String que se envia por wifi
   msg+=(ei);
   msg+=(F(",\"ED\":"));
   msg+=(ed);
+  msg+=(F(",\"ET\":"));
+  msg+=(et);
   msg+=(F(",\"S0\":"));
   msg+=(s[0]);
   msg+=(F(",\"S1\":"));
@@ -69,10 +71,10 @@ void sendState(){//String que se envia por wifi
   msg+=(s[7]);
   msg+=(F(",\"S8\":"));
   msg+=(s[8]);
-  msg+=("}\n");
-  Serial1.print(msg);
+  msg+=("}");
+  Serial1.println(msg);
 }
-ISR(TIMER4_COMPA_vect) // rutina de la interrupcion 4
+ISR(TIMER5_COMPA_vect) // rutina de la interrupcion 4
 {
-  //sendState();
+  sendState();
 }

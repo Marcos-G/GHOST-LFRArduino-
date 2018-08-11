@@ -3,7 +3,7 @@ int min[]={1024,1024,1024,1024,1024,1024,1024,1024,1024};
 bool invertir=true;//true para smd(733)
 bool calibrado=false;
 int s[]={0,0,0,0,0,0,0,0,0};
-float posSen[]={1.8,2.8,3.8,4.8,6.0,7.2,8.2,9.2,10.2};
+float posSen[]={18.0,28.0,38.0,48.0,60.0,72.0,82.0,92.0,102.0};
 void sensado(){//eso que dice
   if(calibrado){//si ya esta calibrado empezamos a medir
   float prom=0;

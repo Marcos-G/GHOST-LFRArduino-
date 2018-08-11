@@ -1,8 +1,8 @@
 float kp=0.0;float ki=0.0;float kd=0.0;
 float ep=0.0;float ei=0.0;float ed=0.0;
-float pos=6.0;
+float pos=60.0;
 float preve=0.0;
-float setpoint=6.0;
+float setpoint=60.0;
 int et=0;
 void setPidClock(){//para que sea mas bonito
   setearTimer50htz();

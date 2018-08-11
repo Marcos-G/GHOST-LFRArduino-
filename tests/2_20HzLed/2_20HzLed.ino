@@ -1,15 +1,15 @@
 void setearTimer20htz(){
   noInterrupts(); // disable all interrupts
-  TCCR4A = 0;
-  TCCR4B = 0;
-  TCNT4 = 0;
-  OCR4A = 3125; // compare match register 16MHz/256/20Hz (20016micros)
-  TCCR4B |= (1 << WGM42); // CTC mode
-  TCCR4B |= (1 << CS42 ); // 256 prescaler
-  TIMSK4 |= (1 << OCIE4A); // enable timer compare interrupt
+  TCCR5A = 0;
+  TCCR5B = 0;
+  TCNT5 = 0;
+  OCR5A = 3125; // compare match register 16MHz/256/20Hz (20016micros)
+  TCCR5B |= (1 << WGM52); // CTC mode
+  TCCR5B |= (1 << CS52 ); // 256 prescaler
+  TIMSK5 |= (1 << OCIE5A); // enable timer compare interrupt
   interrupts();
 }
-ISR(TIMER4_COMPA_vect) // timer compare interrupt service routine
+ISR(TIMER5_COMPA_vect) // timer compare interrupt service routine
 {
   digitalWrite(38,!digitalRead(38));                     // wait for a second
 }
