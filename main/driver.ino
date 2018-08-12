@@ -1,5 +1,6 @@
 int EA=9,EB=6,I1=53,I2=8,I3=7,I4=16;//pines del driver
 int vel=0;//velocidad "frontal" del seguidor
+double out=0.0;
 void setDriverModes(){
   pinMode (EA, OUTPUT); //todos outputs
   pinMode (EB, OUTPUT);
@@ -7,16 +8,15 @@ void setDriverModes(){
   pinMode (I2, OUTPUT);
   pinMode (I3, OUTPUT);
   pinMode (I4, OUTPUT);
-  pinMode(PHANTOM_LED,OUTPUT);
 }
-void correccion(int e){//giro
-  if(e>0){//si el error es positivo girar a la derecha
-    setMotores(min(255,vel+e),vel);
-    digitalWrite(PHANTOM_LED,HIGH);
+void correccion(){//giro
+  if(out<0){//si el error es positivo girar a la derecha
+    setMotores(min(255,vel-out),vel);
+  }else if(out>0){//si el error es negativo girar a la izquierda
+    setMotores(vel,min(255,vel+out));
   }
-  if(e<0){//si el error es negativo girar a la izquierda
-    setMotores(vel,min(255,vel-e));
-      digitalWrite(PHANTOM_LED,LOW);
+  else{
+    setMotores(vel,vel);
   }
 }
 void setMotores(int velI,int velD){//funcion para setear velocidades

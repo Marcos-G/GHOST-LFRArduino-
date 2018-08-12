@@ -30,11 +30,16 @@ void updateK(){//actualizo las K si hay algun dato en el serial
     else if(k=='V'){
       vel=val;
     }
+    else if(k=='U'){
+      usr=val;
+    }
   }
 }
 void sendState(){//String que se envia por wifi
   String msg="{";
 ///
+  msg+=(F("\"TIME\":"));
+  msg+=(millis());
   msg+=(F("\"KP\":"));
   msg+=(kp);
   msg+=(F(",\"KI\":"));
@@ -43,6 +48,8 @@ void sendState(){//String que se envia por wifi
   msg+=(kd);
   msg+=(F(",\"VEL\":"));
   msg+=(vel);
+  msg+=(F(",\"USR\":"));
+  msg+=(usr);
   msg+=(F(",\"POS\":"));
   msg+=(pos);
   msg+=(F(",\"EP\":"));
@@ -51,8 +58,8 @@ void sendState(){//String que se envia por wifi
   msg+=(ei);
   msg+=(F(",\"ED\":"));
   msg+=(ed);
-  msg+=(F(",\"ET\":"));
-  msg+=(et);
+  msg+=(F(",\"OUT\":"));
+  msg+=(out);
   msg+=(F(",\"S0\":"));
   msg+=(s[0]);
   msg+=(F(",\"S1\":"));
