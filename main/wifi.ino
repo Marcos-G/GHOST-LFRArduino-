@@ -33,14 +33,21 @@ void updateK(){//actualizo las K si hay algun dato en el serial
     else if(k=='U'){
       usr=val;
     }
+    else if(k=='F'){
+      kFrenoD=val;
+    }
+    else if(k=='R'){
+      kFrenoP=val;
+    }
+    //guardarData();
   }
 }
 void sendState(){//String que se envia por wifi
   String msg="{";
 ///
   msg+=(F("\"TIME\":"));
-  msg+=(millis());
-  msg+=(F("\"KP\":"));
+  msg+=(medTime);
+  msg+=(F(",\"KP\":"));
   msg+=(kp);
   msg+=(F(",\"KI\":"));
   msg+=(ki);
@@ -48,16 +55,20 @@ void sendState(){//String que se envia por wifi
   msg+=(kd);
   msg+=(F(",\"VEL\":"));
   msg+=(vel);
+  msg+=(F(",\"FRENOD\":"));
+  msg+=(kFrenoD);
+  msg+=(F(",\"FRENOP\":"));
+  msg+=(kFrenoP);
   msg+=(F(",\"USR\":"));
   msg+=(usr);
   msg+=(F(",\"POS\":"));
   msg+=(pos);
   msg+=(F(",\"EP\":"));
-  msg+=(ep);
+  msg+=(-ep);
   msg+=(F(",\"EI\":"));
   msg+=(ei);
   msg+=(F(",\"ED\":"));
-  msg+=(ed);
+  msg+=(-ed);
   msg+=(F(",\"OUT\":"));
   msg+=(out);
   msg+=(F(",\"S0\":"));
@@ -83,5 +94,12 @@ void sendState(){//String que se envia por wifi
 }
 ISR(TIMER5_COMPA_vect) // rutina de la interrupcion 4
 {
+  t=micros();
+  //Serial1.println("W1:"+(t-time));
+  time=t;
+  updateK();
   sendState();
+  t=micros();
+  //Serial1.println("W2:"+(t-time));
+  time=t;
 }

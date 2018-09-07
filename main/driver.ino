@@ -1,5 +1,6 @@
 int EA=9,EB=6,I1=53,I2=8,I3=7,I4=16;//pines del driver
 int vel=0;//velocidad "frontal" del seguidor
+int freno=0;
 double out=0.0;
 void setDriverModes(){
   pinMode (EA, OUTPUT); //todos outputs
@@ -10,13 +11,14 @@ void setDriverModes(){
   pinMode (I4, OUTPUT);
 }
 void correccion(){//giro
+  int v=max(0,vel-freno);
   if(out<0){//si el error es positivo girar a la derecha
-    setMotores(min(255,vel-out),vel);
+    setMotores(int(min(255,(v- (out/2))*1)),min(255,(v+(out/2))));
   }else if(out>0){//si el error es negativo girar a la izquierda
-    setMotores(vel,min(255,vel+out));
+    setMotores(int(min(255,(v-(out/2))*1)),min(255,(v+(out/2))));
   }
   else{
-    setMotores(vel,vel);
+    setMotores(v,v);
   }
 }
 void setMotores(int velI,int velD){//funcion para setear velocidades
@@ -29,7 +31,7 @@ void motorDer(int vel){//seteo de velocidad al derecho
     digitalWrite(I2,vel>0);
 }
 void motorIzq(int vel){//seteo de velocidad al izq
-    analogWrite(EB,abs(vel));
+    analogWrite(EB,abs(vel));file:///usr/share/applications/arduino.desktop
     digitalWrite(I3,vel<0);
     digitalWrite(I4,vel>0);
 }
