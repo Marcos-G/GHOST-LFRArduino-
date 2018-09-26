@@ -59,6 +59,10 @@ void sendState(){//String que se envia por wifi
   msg+=(kFrenoD);
   msg+=(F(",\"FRENOP\":"));
   msg+=(kFrenoP);
+  msg+=(F(",\"ENCI\":"));
+  msg+=(encI);
+  msg+=(F(",\"ENCD\":"));
+  msg+=(encD);
   msg+=(F(",\"USR\":"));
   msg+=(usr);
   msg+=(F(",\"POS\":"));
@@ -91,6 +95,8 @@ void sendState(){//String que se envia por wifi
   msg+=(s[8]);
   msg+=("}");
   Serial1.println(msg);
+  encI=0;
+  encD=0;
 }
 ISR(TIMER5_COMPA_vect) // rutina de la interrupcion 4
 {

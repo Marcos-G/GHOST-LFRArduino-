@@ -12,10 +12,10 @@ void setDriverModes(){
 }
 void correccion(){//giro
   int v=max(0,vel-freno);
-  if(out<0){//si el error es positivo girar a la derecha
-    setMotores(int(min(255,(v- (out/2))*1)),min(255,(v+(out/2))));
-  }else if(out>0){//si el error es negativo girar a la izquierda
-    setMotores(int(min(255,(v-(out/2))*1)),min(255,(v+(out/2))));
+  if(out>0){//si el error es positivo girar a la derecha
+    setMotores(max(-255,v-out),v);
+  }else if(out<0){//si el error es negativo girar a la izquierda
+    setMotores(v,max(-255,v+out));
   }
   else{
     setMotores(v,v);

@@ -7,6 +7,9 @@ void setup() {
   setPidClock();//se inicia el timer que activa el calculo del pid
   setDriverModes();//seteo de salidas para el driver
   calibrar();//5segundos de calibracion
+  attachInterrupt(digitalPinToInterrupt(3), encoderI, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(2), encoderD, CHANGE);
+
 }
 void loop() {
 //revisar si hay valores para actualizar las constantes del pid
