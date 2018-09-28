@@ -6,7 +6,7 @@ void encoderI() {
   Serial1.print("I");Serial1.println(encI);
 }
 void encoderD() {
-  Serial1.println("D");
+  Serial1.println("D");Serial1.println(encD);
   encD+=1;
   
 }void setup() {
