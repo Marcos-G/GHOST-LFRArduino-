@@ -25,14 +25,16 @@ void setMotores(int velI,int velD){//funcion para setear velocidades
   motorDer(velD);
 }
 void motorDer(int vel){//seteo de velocidad al derecho
-    analogWrite(EA,abs(vel));
+    analogWrite(EA,0);
     digitalWrite(I1,vel<0);
     digitalWrite(I2,vel>0);
+    analogWrite(EA,abs(vel));
 }
 void motorIzq(int vel){//seteo de velocidad al izq
-    analogWrite(EB,abs(vel));file:///usr/share/applications/arduino.desktop
+    analogWrite(EB,0);
     digitalWrite(I3,vel<0);
     digitalWrite(I4,vel>0);
+    analogWrite(EB,abs(vel));
 }
 void trabarIzq(){//trabar motores
   analogWrite(EB,128);

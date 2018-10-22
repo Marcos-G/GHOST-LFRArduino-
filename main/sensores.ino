@@ -10,9 +10,9 @@ void sensado(){//eso que dice
   float prom=0;
   float sum=0;
   for(int a=0;a<9;a++){
-    s[a]=map(analogRead(a),min[a],max[a],0,1023);//ANALOGICOmapeo de el minimo y max a 0-1023
+    //s[a]=map(analogRead(a),min[a],max[a],0,1023);//ANALOGICOmapeo de el minimo y max a 0-1023
     //s[a]=(digitalRead(sPin[a])*1024);//DIGITAL
-    //s[a]=map(analogRead(a),min[a],max[a],0,1)*1023;
+    s[a]=digitalizar(analogRead(a),min[a],max[a]);//ANALOGICODigitalizado
     if(invertir){//si es el 733 se invierte
       s[a]=1023-s[a];
     }
@@ -21,10 +21,17 @@ void sensado(){//eso que dice
     prom+=s[a]*posSen[a];
     sum+=s[a];
   }
-  if(sum!=0){
+  if(sum!=0 && sum<3069){
    pos=prom/sum;
   }
   }
+}
+int digitalizar(int s,int mi,int ma){
+  float me=(mi+ma)/2;
+  if(s<me)
+  return 0;
+  else
+  return 1023;
 }
 void calibrar(){//calibrar durante los primeros 5 segundos
   int tiempo = millis();

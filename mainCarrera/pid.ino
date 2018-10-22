@@ -1,6 +1,3 @@
-
-
-
 double ep=0.0;double ei=0.0;double ed=0.0;
 
 double pos=60.0;
@@ -24,7 +21,13 @@ void setearTimer50htz(){//seteo de timer de 50khz con variables de registro
 }
 ISR(TIMER3_COMPA_vect) // rutina de interrupcion 3
 {
+  
   if(correr){
+  /*  if(millis()-arrT<tar){
+    vel=velar+pow(((millis()-arrT)/tar),2)*(velmax-velar);
+  }else{
+    vel=velmax;
+  }*/
   sensado();//llamado a sensar
   pidCalc();//calculo del pid
   correccion();//seteo de motores
