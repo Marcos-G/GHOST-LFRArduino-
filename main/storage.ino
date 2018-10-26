@@ -1,4 +1,4 @@
-#include <EEPROM.h>
+/*#include <EEPROM.h>
 int dirs[]={0,sizeof(double),sizeof(double)*2,sizeof(double)*3,sizeof(double)*3+sizeof(int),sizeof(double)*3+sizeof(int)*2,sizeof(double)*4+sizeof(int)*2};
 void guardarData(){
   EEPROM.put(kp,dirs[0]);
@@ -18,4 +18,4 @@ void leerData(){
   EEPROM.get(dirs[5],kFrenoD);
   EEPROM.get(dirs[6],kFrenoP);
 }
-
+*/

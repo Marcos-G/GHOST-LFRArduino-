@@ -94,12 +94,9 @@ void sendState(){//String que se envia por wifi
 }
 ISR(TIMER5_COMPA_vect) // rutina de la interrupcion 4
 {
-  t=micros();
-  //Serial1.println("W1:"+(t-time));
-  time=t;
+  
+
   updateK();
   sendState();
-  t=micros();
-  //Serial1.println("W2:"+(t-time));
-  time=t;
+  
 }
