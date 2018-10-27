@@ -12,6 +12,21 @@ void setDriverModes() {
   pinMode (I3, OUTPUT);
   pinMode (I4, OUTPUT);
 }
+
+void motorDer(int vel) { //seteo de velocidad al derecho
+  analogWrite(EA, abs(vel));
+  digitalWrite(I1, vel < 0);
+  digitalWrite(I2, vel > 0);
+}
+void motorIzq(int vel) { //seteo de velocidad al izq
+  analogWrite(EB, abs(vel));
+  digitalWrite(I3, vel < 0);
+  digitalWrite(I4, vel > 0);
+}
+void setMotores(int velI, int velD) { //funcion para setear velocidades
+  motorIzq(velI);
+  motorDer(velD);
+}
 void correccion() { //giro
   int v = max(0, vel - freno);
   if (out > 0) { //si el error es positivo girar a la derecha
@@ -22,18 +37,4 @@ void correccion() { //giro
   else {
     setMotores(v, v);
   }
-}
-void setMotores(int t velD) { //funcion para setear velocidades
-  motorIzq(velI);
-  motorDer(velD);
-}
-void motorDer(int veteo de velocidad al derecho
-              analogWrite(EA, a);
-              digitalWrite(I1, vel < 0);
-              digitalWrite(I2, vel > 0);
-}
-void motorIzq(int vel) { //seteo de velocidad al izq
-analogWrite(EB, abs(vel)); file: ///usr/share/applications/arduino.desktop
-  digitalWrite(I3, vel < 0);
-  digitalWrite(I4, vel > 0);
 }

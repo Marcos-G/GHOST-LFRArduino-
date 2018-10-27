@@ -1,4 +1,3 @@
-double kp = 0.0; double ki = 0.0; double kd = 0.0;
 double ep = 0.0; double ei = 0.0; double ed = 0.0;
 double kFrenoD = 0.0; double kFrenoP = 0.0;
 double pos = 60.0;
@@ -21,25 +20,40 @@ void setearTimer50htz() { //seteo de timer de 50khz con variables de registro
   TIMSK3 |= (1 << OCIE3A); // enable timer compare interrupt
   interrupts();
 }
+void sensado();
 ISR(TIMER3_COMPA_vect) // rutina de interrupcion 3
 {
-
+if(correr){
+    if(millis()-arrT<tar){
+    vel=velar+pow(((millis()-arrT)/tar),2)*(velmax-velar);
+  }else{
+    vel=velmax;
+  }
   sensado();//llamado a sensar
   pidCalc();//calculo del pid
   correccion();//seteo de motores
+  }
+  
 
 }
 void pidCalc() { //calculo del pid
   double e = setpoint - pos;
-  ep = e * kp;
+  if(curva){
+  ep = e * kpc;
   if (abs(out) < 255 or ei * e < 0) {
-    ei += ki * e;
+    ei += kic * e;
   }
-  ed = (e - preve) * kd;
-  out = ep + ei + ed;
+  ed = (e - preve) * kdc;
+ 
+  }else{
+    ep = e * kpr;
+  if (abs(out) < 255 or ei * e < 0) {
+    ei += kir * e;
+  }
+  ed = (e - preve) * kdr;
+  }
+   out = ep + ei + ed;
   freno = max(abs(e - preve) * kFrenoD, abs(e) * kFrenoP);
   preve = e;
-} else if (usr == 2) { //Joaco
 
-}
 }

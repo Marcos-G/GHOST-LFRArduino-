@@ -5,7 +5,7 @@ double kd=21.0;
 //int vel=250;
 int velmax=250;//velocidad "frontal" del seguidor
 int velar=100;
-int tar=2000;
+float tar=2000.0;
 
 double kFrenoD=0.0;
 double kFrenoP=0.0;
